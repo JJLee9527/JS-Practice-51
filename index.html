@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="room-list" class="card-columns">
+  </section>
+</body>
+<script rel="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script rel="text/javascript">
+  let url_getRooms = 'https://challenge.thef2e.com/api/thef2e2019/stage6/rooms';
+
+// 列表區塊
+let container = document.getElementById('room-list')
+
+// 宣告資料
+let rooms = [];
+
+// 定義函式
+const getRooms = ()=>{
+  fetch(url_getRooms,{
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization':'Bearer WVJXp0EzDDOieND3BXS77i0sxu1tN7RAztJx3EKIhDQsySexZRgA9EQpDAWs'
+    }
+  }).then(response=>{
+    return response.json();
+  }).then(json=>{
+    rooms = json.items
+    render()
+  }).catch(err=>{
+    console.log(err)
+  })
+}
+
+// 渲染項目
+const render = ()=>{
+  let content = '';
+  let roomList = document.getElementById('room-list');
+  
+  rooms.forEach(room=>{
+    content += `
+      <div class="card">
+        <img class="card-img-top" src="${room.imageUrl}">
+        <div class="card-body">
+          <h6>${room.name}</h6>
+          <h4 class="text-secondary mb-0">${room.normalDayPrice}</h4>
+        </div>
+      </div>`
+  })
+  roomList.innerHTML = content
+}
+
+getRooms();
+</script>
+</html>
