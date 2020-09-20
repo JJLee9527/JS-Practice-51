@@ -41,6 +41,8 @@ const getRooms = ()=>{
   })
 }
 
+
+// 點擊前往
 const toRoom = (event) =>{
   console.log(event)
   console.log(event.target.dataset.id)
@@ -61,7 +63,7 @@ const render = ()=>{
           <h6>${room.name}</h6>
           <h4 class="text-secondary mb-0">${room.normalDayPrice}</h4>
         </div>
-        <a class="position-absolute w-100 h-100" data-id="${room.id}" onclick="toRoom(event)" style="left:0;top:0;"></a>
+        <a class="position-absolute w-100 h-100" href="javascript:void(0);" data-id="${room.id}" onclick="toRoom(event)" style="left:0;top:0;"></a>
       </div>`
   })
   roomList.innerHTML = content
